@@ -10,6 +10,20 @@ body {
   overflow-x: hidden;
 }
 
+.download-session{
+    text-align: center;
+}
+
+
+.download-session div button{
+    font-size: 2rem;
+}
+
+.download-session div img{
+    width: 40rem;
+    height: 30rem;
+}
+
 .layout_padding {
   padding: 90px 0;
 }
