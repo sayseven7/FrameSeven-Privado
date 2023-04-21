@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Remover a extensão .html dos URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# Redirecionar para a página "notFound" em caso de erro 404
+ErrorDocument 404 https://sayseven7.github.io/FrameSeven-Privado/notFound
