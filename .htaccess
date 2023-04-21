@@ -5,5 +5,12 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.html -f
 RewriteRule ^(.*)$ $1.html [L]
 
+# Verificar se index.php existe e redirecionar para ele
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
 # Redirecionar para a página "notFound" em caso de erro 404
 ErrorDocument 404 https://sayseven7.github.io/FrameSeven-Privado/notFound
+
