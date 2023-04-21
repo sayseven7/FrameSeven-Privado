@@ -1,20 +1,27 @@
-RewriteEngine On
-
-# Remover a extensão .html dos URLs
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.html -f
-RewriteRule ^(.*)$ $1.html [L]
-
-# Verificar se index.php existe e redirecionar para ele
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^(.*)$ $1.php [L]
-
-AddType application/x-httpd-php .php
-AddHandler application/x-httpd-php .php
-
-
 # Redirecionar para a página "notFound" em caso de erro 404
 ErrorDocument 404 https://sayseven7.github.io/FrameSeven-Privado/notFound
 
+# Definir o tipo de arquivo padrão como PHP
+AddType application/x-httpd-php .php
+
+# Remover a extensão .html dos URLs
+RewriteEngine On
+RewriteBase /
+
+# Verificar se o arquivo solicitado não é um diretório
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Verificar se o arquivo solicitado é um arquivo .html existente
+RewriteCond %{REQUEST_FILENAME}\.html -f
+
+# Redirecionar para o arquivo .html
+RewriteRule ^(.*)$ $1.html [L]
+
+# Verificar se o arquivo solicitado não é um arquivo existente
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Verificar se o arquivo solicitado é um arquivo .php existente
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+# Redirecionar para o arquivo .php
+RewriteRule ^(.*)$ $1.php [L]
