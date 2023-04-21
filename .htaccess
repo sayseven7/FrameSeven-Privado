@@ -11,6 +11,10 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [L]
 
+AddType application/x-httpd-php .php
+AddHandler application/x-httpd-php .php
+
+
 # Redirecionar para a página "notFound" em caso de erro 404
 ErrorDocument 404 https://sayseven7.github.io/FrameSeven-Privado/notFound
 
