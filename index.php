@@ -1,3 +1,23 @@
+<?php
+  if($_POST){
+    $firstName=$_POST['firstName'];
+    $lastName=$_POST['lastName'];
+    $emailTo=$_POST['toEmail'];
+    $phone=$_POST['phone'];
+    $message=$_POST['message'];
+    $headers='From: '.$_POST['jaciley157@gam1fy.com'];
+
+    if(mail($firstName, $lastName, $emailTo, $phone,$message,$headers)){
+      echo '<div class="erro-msg alert alert-success text-center">
+            Your message was sent, we will get back to you ASAP!</div>';
+      header("Location: https://comunidadeconecta.com/enviaEmail");
+    }else{
+      echo '<div class="erro-msg alert alert-danger text-center">
+            Your message couldn\'t be sent, please try again later</div>';
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -468,34 +488,35 @@
             <div class="row">
                 <div class="col-md-9 mx-auto">
                     <div class="form_container">
-                        <form>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" placeholder="First Name" />
+                        <div style="margin-top: 15px;" class='erro-msg'>
+                            <form method="POST">
+                                <div class="form-row">
+                                  <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" name="firstName" id="firstName" placeholder="First Name" />
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Last Name" />
+                                  </div>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" placeholder="Last Name" />
+                                <div class="form-row">
+                                  <div class="form-group col-md-6">
+                                    <input type="email" class="form-control" name="toEmail" id="toEmail" placeholder="Email" />
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone Number" />
+                                  </div>
                                 </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <input type="email" class="form-control" placeholder="Email" />
+                                <div class="form-group ">
+                                  <textarea class="form-control message-box" name="message" id="message" placeholder="Message"></textarea>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" placeholder="Phone Number" />
+                                <div class="btn-box">
+                                  <button type="submit">Submit</button>
                                 </div>
-                            </div>
-                            <div class="form-group ">
-                                <input type="text" class="message-box" placeholder="Message" />
-                            </div>
-                            <div class="btn-box">
-                                <button type="submit">Submit</button>
-                            </div>
-                        </form>
+                              </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
     <!-- end contact section -->
 
@@ -630,6 +651,37 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
     </script>
     <!-- End Google Map -->
+
+    <script type='text/javascript'>
+        $('form').submit(function(e){
+          var error='';
+   
+          if($('#email').val()==""){
+            error +="The email field is required.<br>"
+          }
+          if($('#firstName').val()==""){
+            error +="The to firstName field is required.<br>"
+          }
+          if($('#lastName').val()==""){
+            error +="The to lastName field is required.<br>"
+          }
+          if($('#toEmail').val()==""){
+            error +="The to email field is required.<br>"
+          }
+          if($('#subject').val()==""){
+            error +="The subject field is required.<br>"
+          }
+          if($('#content').val()==""){
+            error +="The content field is required.<br>"
+          }
+          if(error !=""){
+            $("#error").html('<div class="alert alert-danger"><p><strong>There were error(s) in your form:</strong></p>' + error + '</div>')
+            return false;
+          }else{
+            return true;
+          }
+        })      
+      </script>
 
 </body>
 
